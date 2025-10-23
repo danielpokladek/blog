@@ -11,19 +11,19 @@ thumbnail = "resources/_gen/background.svg"
 ## Shortcode Banner Examples:
 
 {{< alert icon="circle-info" >}}
-This is example of informational shortcode!
+Info alert example.
 {{< /alert >}}
 
 <br>
 
 {{< alert cardColor="#e69539ff" iconColor="#57431dff" textColor="#f1faee" >}}
-**Warning!** This is example of alert shortcode!
+**Warning!** Warning alert example.
 {{< /alert >}}
 
 <br>
 
 {{< alert icon="fire" cardColor="#e63946" iconColor="#1d3557" textColor="#f1faee" >}}
-**Error:** This is example of error alert shortcode!
+**Error!** Error alert example.
 {{< /alert >}}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
