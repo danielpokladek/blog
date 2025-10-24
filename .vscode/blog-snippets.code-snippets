@@ -41,5 +41,14 @@
 			"**Error!** $1",
 			"{{< /alert >}}"
 		]
+	},
+	"Code Snippet": {
+		"scope": "markdown",
+		"prefix": "code",
+		"body": [
+			"```$1",
+			"",
+			"```"
+		]
 	}
 }

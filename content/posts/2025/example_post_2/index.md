@@ -1,7 +1,6 @@
 +++
 date = '2025-10-23'
 title = 'Example Post 2'
-thumbnail = "resources/_gen/background.svg"
 +++
 
 ## TOC Headers (H2)

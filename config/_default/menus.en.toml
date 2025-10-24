@@ -11,16 +11,16 @@
 # ordered by weight from lowest to highest.
 
 [[main]]
- name = "About"
- pageRef = "#"
+name = "About"
+pageRef = "about"
 
 [[main]]
- name = "Blog"
- pageRef = "posts"
+name = "Blog"
+pageRef = "posts"
 
 [[main]]
- name = "Projects"
- pageRef = "#"
+name = "Projects"
+pageRef = "#"
 
 #[[main]]
 #  name = "example sub-menu 1"
