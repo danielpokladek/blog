@@ -1,5 +1,4 @@
 ---
-date: '2025-10-23'
 title: 'Technically an Artist'
 showAuthor: false
 showDate: false
@@ -10,17 +9,18 @@ showComments: false
 showSummary: false
 showViews: false
 showLikes: false
+showPagination: false
 showRelatedContent: false
 layoutBackgroundHeaderSpace: false
 ---
 
 Hey there! I'm **Daniel Pokladek** ~
 
-I'm a UK-based developer, who technically is an artist (*yes, I will stop this joke now*) - I love building the moment-to-moment feel of games, crafting gameplay, tools, and shaders that bring ideas to life.
+I'm a UK-based developer, who technically is an artist (*yes, I will stop this joke now*) - I love shaping the moment-to-moment feel of games through gameplay systems, tools, and shaders that bring ideas to life.
 
-My core experience is in **C#** and **Unity** games engine, but as part of my last position I have also worked professionally with **TypeScript**, **PixiJS**, and **GLSL** shader language.
+My core experience is in **C#** and **Unity** games engine, but previously worked professionally with **TypeScript**, **PixiJS**, and **GLSL** shader language.
 
-In my free time I work on various hobby projects, ranging from [PixiJS Particle System](https://github.com/danielpokladek/pixi-particle-system) to my [Shaders Vault](https://github.com/danielpokladek-shaders); additionally I blog about projects I work on to expand my knowledge and share my findings.
+In my free time I work on numerous hobby projects, ranging from [Shaders Vault](https://github.com/danielpokladek-shaders) to [PixiJS Particle System](https://github.com/danielpokladek/pixi-particle-system). I frequently blog about my projects to capture my findings and share my knowledge.
 
 ## Work Experience
 
@@ -45,6 +45,18 @@ Worked closely with designers, and artists to turn game concepts into playable a
 
 {{< timeline >}}
 
+{{< timelineItem icon="github" header="Shader Vault" subheader="GLSL, HLSL, ShaderGraph" >}}
+
+A collection of shaders I've worked on, spanning focused techniques like stencil shaders to fully realized effects, including my remake of the portal from Sypro: Reignited Trilogy.
+
+<br></br>
+
+{{< button href="https://github.com/danielpokladek-shaders" >}}
+See on GitHub!
+{{< /button >}}
+
+{{< /timelineItem >}}
+
 {{< timelineItem icon="github" header="PixiJS Particle System" subheader="PixiJS, TypeScript, Vite" >}}
 
 A modern, flexible particle system for PixiJS - a spiritual successor to the original particle emitter, but rebuilt with a clean TypeScript-first architecture and more expressive API.
@@ -56,12 +68,6 @@ This project is open-sourced under the MIT License, allowing collaboration from 
 <br></br>
 
 {{< github repo="danielpokladek/pixi-particle-system" showThumbnail=false >}}
-{{< /timelineItem >}}
-
-{{< timelineItem icon="github" header="Shader Vault" subheader="GLSL, HLSL, ShaderGraph" >}}
-
-
-
 {{< /timelineItem >}}
 
 {{< timelineItem icon="github" header="Personal Website" badge="< You're here" subheader="Hugo, Blowfish" >}}

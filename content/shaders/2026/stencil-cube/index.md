@@ -2,6 +2,7 @@
 title: 'Stencil Cube'
 date: '2026-01-14'
 tags: ["shaders", "unity"]
+summary: "Using stencil shaders to create impossible cube inspired by Antichamber."
 ---
 
 {{< video 
