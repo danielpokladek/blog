@@ -9,6 +9,7 @@ showComments: false
 showSummary: false
 showViews: false
 showLikes: false
+sharingLinks: false
 showPagination: false
 showRelatedContent: false
 layoutBackgroundHeaderSpace: false

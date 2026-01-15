@@ -10,17 +10,28 @@ showSummary: false
 showViews: false
 showPagination: false
 showLikes: false
+sharingLinks: false
 showRelatedContent: false
 layoutBackgroundHeaderSpace: false
 ---
 
 ## Shaders Vault
 
-![Banner Placeholder](https://placehold.co/800x450)
+{{< video 
+    src="shaders_showreel.mp4"
+    caption="Some of the effects you will find in shaders vault."
+    autoplay="true"
+    loop="true"
+    muted="true"
+    controls="false"
+    playsinline="true"
+>}}
 
 ---
 
-A collection of shaders I've worked on, spanning focused techniques like stencil shaders to fully realized effects, including my remake of the portal from Sypro: Reignited Trilogy.
+I originally started working with shaders during my undergraduate dissertation, and have since fallen in love with them. I enjoy spending my free time tinkering with new effects and bringing ideas to life.
+
+Shaders Vault is a collection of shaders I've worked on, spanning focused techniques like stencil shaders to fully realized effects, including my remake of the portal from Spyro: Reignited Trilogy.
 
 {{< button href="https://github.com/danielpokladek-shaders" >}}
 See on GitHub!
@@ -50,7 +61,10 @@ As the library grew and I introduced more personal improvements, it evolved beyo
 
 ## Website
 
-![Banner Placeholder](https://placehold.co/800x450)
+{{< figure
+    src = "website_banner.webp"
+    nozoom = true
+>}}
 
 {{< github repo="danielpokladek/blog" showThumbnail=false >}}
 
@@ -58,4 +72,6 @@ As the library grew and I introduced more personal improvements, it evolved beyo
 
 Oh look, you're here!
 
-This website is built using Hugo library and Blowfish theme, and utilizes GitHub pages as the hosting provider, with automated deployment workflow.
+This website is built using the [Hugo](https://github.com/gohugoio/hugo) static site framework with the [Blowfish](https://github.com/gohugoio/hugo) theme, customized to suit my needs. I chose a static-site approach for its performance, simplicity, maintainability, and blogging integration.
+
+The site is hosted on GitHub Pages, with GitHub Actions handling automated builds and deployment. Every change is built and deployed through a lightweight CI pipeline, keeping the workflow fast, repeatable, and hands-off.
