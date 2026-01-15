@@ -1,5 +1,5 @@
 ---
-title: 'Technically an Artist'
+# title: 'Technically an Artist'
 showAuthor: false
 showDate: false
 showTaxonomies: false
@@ -15,6 +15,8 @@ showRelatedContent: false
 layoutBackgroundHeaderSpace: false
 ---
 
+## Technically an Artist
+
 Hey there! I'm **Daniel Pokladek** ~
 
 I'm a UK-based developer, who technically is an artist (*yes, I will stop this joke now*) - I love shaping the moment-to-moment feel of games through gameplay systems, tools, and shaders that bring ideas to life.
@@ -23,82 +25,64 @@ My core experience is in **C#** and **Unity** games engine, but previously worke
 
 In my free time I work on numerous hobby projects, ranging from [Shaders Vault](https://github.com/danielpokladek-shaders) to [PixiJS Particle System](https://github.com/danielpokladek/pixi-particle-system). I frequently blog about my projects to capture my findings and share my knowledge.
 
-## Work Experience
+---
 
-{{< timeline >}}
+## Shader Vault
 
-{{< timelineItem icon="location-dot" header="Switch Studios (Games Global)" badge="Mar 2022 - Dec 2025" subheader="Developer Level 1" >}}
+{{< video 
+    src="shaders_showreel.mp4"
+    caption="Some of the effects you will find in shaders vault."
+    autoplay="true"
+    loop="true"
+    muted="true"
+    controls="false"
+    playsinline="true"
+>}}
 
-<small> TypeScript, GLSL, NodeJS, PixiJS</small>
-<br></br>
+I originally started working with shaders during my undergraduate dissertation, and have since fallen in love with them. I enjoy spending my free time tinkering with new effects and bringing ideas to life.
 
-Primarily a front-end client development, but also crafted various in-house tools to streamline and improve the development pipeline, for a fast-paced studio.
-
-<br></br>
-
-Worked closely with designers, and artists to turn game concepts into playable and exciting experiences, for players across the globe. Constantly pushed forward the studio capabilities in technical art, in order to deliver smaller and more performant web-based mobile titles.
-
-{{< /timelineItem >}}
-
-{{< /timeline >}}
-
-## Projects
-
-{{< timeline >}}
-
-{{< timelineItem icon="github" header="Shader Vault" subheader="GLSL, HLSL, ShaderGraph" >}}
-
-A collection of shaders I've worked on, spanning focused techniques like stencil shaders to fully realized effects, including my remake of the portal from Sypro: Reignited Trilogy.
-
-<br></br>
+Shader Vault is a collection of shaders I've worked on, spanning focused techniques like stencil shaders to fully realized effects, including my remake of the portal from Spyro: Reignited Trilogy.
 
 {{< button href="https://github.com/danielpokladek-shaders" >}}
 See on GitHub!
 {{< /button >}}
 
-{{< /timelineItem >}}
+---
 
-{{< timelineItem icon="github" header="PixiJS Particle System" subheader="PixiJS, TypeScript, Vite" >}}
+## PixiJS Particle System
+
+{{< video 
+    src="pixi-particle-system-showcase.mp4"
+    caption="PixiJS Particle System with it's companion web-based editor."
+    autoplay="true"
+    loop="true"
+    muted="true"
+    controls="false"
+    playsinline="true"
+>}}
 
 A modern, flexible particle system for PixiJS - a spiritual successor to the original particle emitter, but rebuilt with a clean TypeScript-first architecture and more expressive API.
 
-<br></br>
+I originally started working on this project alongside a PixiJS-based portfolio project, where I needed a particle system for several in-game effects. At the time, the original emitter package wasn't compatible with the latest PixiJS version.
 
-This project is open-sourced under the MIT License, allowing collaboration from the community to make the library a better tool for everyone.
-
-<br></br>
+As the library grew and I introduced more personal improvements, it evolved beyond it's original scope. I eventually decided to make it open-source and share it with the wider community.
 
 {{< github repo="danielpokladek/pixi-particle-system" showThumbnail=false >}}
-{{< /timelineItem >}}
 
-{{< timelineItem icon="github" header="Personal Website" badge="< You're here" subheader="Hugo, Blowfish" >}}
+---
 
-The website is built using Hugo library and Blowfish theme, and utilizes GitHub pages as the hosting provider, with automated deployment workflow.
+
+## Website
+
+{{< figure
+    src = "website_banner.webp"
+    nozoom = true
+>}}
 
 {{< github repo="danielpokladek/blog" showThumbnail=false >}}
-{{< /timelineItem >}}
 
-{{< /timeline >}}
+Oh look, you're here!
 
-## Education
+This website is built using the [Hugo](https://github.com/gohugoio/hugo) static site framework with the [Blowfish](https://github.com/gohugoio/hugo) theme, customized to suit my needs. I chose a static-site approach for its performance, simplicity, maintainability, and blogging integration.
 
-{{< timeline >}}
-
-{{< timelineItem icon="graduation-cap" header="University of Suffolk" badge="BSc with Honours" subheader="Computer Games Programming" >}}
-
-Computer Games Programming course focused on object-orientated programming (OOP), computer software development, and computer graphics. 
-
-<br></br>
-
-Dissertation was focused on using shaders to enhance visual fidelity of games using <strong>Cg</strong>/<strong>HLSL</strong> languages.
-
-<br><br>
-
-We used <strong>C++</strong> when studying computer graphics to create a simple renderer using <strong>SDL</strong> framework, additionally we have also learned how to import and parse 3D Wavefront OBJ files. Each module was completed under a strict deadline either solo or as a team of 2-4 members.
-
-<br><br>
-
-We have worked with <strong>C#</strong> programming language to create game prototypes using Unity game engine, whilst also creating terminal based applications using Visual Studio.
-
-{{< /timelineItem >}}
-{{< /timeline >}}
+The site is hosted on GitHub Pages, with GitHub Actions handling automated builds and deployment. Every change is built and deployed through a lightweight CI pipeline, keeping the workflow fast, repeatable, and hands-off.
