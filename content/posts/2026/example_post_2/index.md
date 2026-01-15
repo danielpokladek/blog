@@ -1,7 +1,8 @@
-+++
-date = '2025-10-23'
-title = 'Example Post 2'
-+++
+---
+date: '2025-10-23'
+title: 'Example Post 2'
+draft: true
+---
 
 ## TOC Headers (H2)
 ### H3
