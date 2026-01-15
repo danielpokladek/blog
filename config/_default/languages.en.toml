@@ -16,11 +16,11 @@ secondaryLogo = "avatar/dp-logo-black.png"
 
 [params.author]
 name = "Daniel Pokladek"
-# email = "youremail@example.com"
+email = "hello@danielpokladek.me"
 image = "avatar/avatar.jpg"
-imageQuality = 96
-headline = "Developer | Crafting Gameplay, Tools & Shaders"
-bio = "Developer | Crafting Gameplay, Tools & Shaders"
+imageQuality = 70
+headline = "Developer | Crafting Shaders, Gameplay & Tools"
+bio = "Developer | Crafting Shaders, Gameplay & Tools"
 links = [
     { email = "hello@danielpokladek.me" },
     { bluesky = "https://bsky.app/profile/dpokladek.bsky.social" },

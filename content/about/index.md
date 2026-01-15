@@ -1,23 +1,42 @@
-+++
-date = '2025-10-23'
-title = 'About Me'
-thumbnail = "resources/_gen/background.svg"
-+++
+---
+date: '2025-10-23'
+title: 'Technically an Artist'
+showAuthor: false
+showDate: false
+showTaxonomies: false
+showReadingTime: false
+showWordCount: false
+showComments: false
+showSummary: false
+showViews: false
+showLikes: false
+showRelatedContent: false
+layoutBackgroundHeaderSpace: false
+---
+
+Hey there! I'm **Daniel Pokladek** ~
+
+I'm a UK-based developer, who technically is an artist (*yes, I will stop this joke now*) - I love building the moment-to-moment feel of games, crafting gameplay, tools, and shaders that bring ideas to life.
+
+My core experience is in **C#** and **Unity** games engine, but as part of my last position I have also worked professionally with **TypeScript**, **PixiJS**, and **GLSL** shader language.
+
+In my free time I work on various hobby projects, ranging from [PixiJS Particle System](https://github.com/danielpokladek/pixi-particle-system) to my [Shaders Vault](https://github.com/danielpokladek-shaders); additionally I blog about projects I work on to expand my knowledge and share my findings.
 
 ## Work Experience
 
 {{< timeline >}}
 
-{{< timelineItem icon="github" header="Switch Studios" badge="Mar 2022 -" subheader="L1 Developer" >}}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non magna ex. Donec sollicitudin ut lorem quis lobortis. Nam ac ipsum libero. Sed a ex eget ipsum tincidunt venenatis quis sed nisl. Pellentesque sed urna vel odio consequat tincidunt id ut purus. Nam sollicitudin est sed dui interdum rhoncus.
-{{< /timelineItem >}}
+{{< timelineItem icon="location-dot" header="Switch Studios (Games Global)" badge="Mar 2022 - Dec 2025" subheader="Developer Level 1" >}}
 
-{{< timelineItem icon="github" header="eXPD8" badge="Jul 2021 - Mar 2022" subheader="Field Marketing/Merchandiser" >}}
-Working close with stores and clients in retail to contribute and increase sales. Daily tasks included displaying and organising products on behalf of the client, setting up promotional displays and launching new products.
-{{< /timelineItem >}}
+<small> TypeScript, GLSL, NodeJS, PixiJS</small>
+<br></br>
 
-{{< timelineItem icon="github" header="Game Anglia" badge="Nov 2018 - Now 2020" subheader="Volunteer" >}}
-Volunteer at Game Anglia, Ipswich and Norwich. I have helped to coordinate the event, to assure smooth running, and also volunteering as the event photographer.
+Primarily a front-end client development, but also crafted various in-house tools to streamline and improve the development pipeline, for a fast-paced studio.
+
+<br></br>
+
+Worked closely with designers, and artists to turn game concepts into playable and exciting experiences, for players across the globe. Constantly pushed forward the studio capabilities in technical art, in order to deliver smaller and more performant web-based mobile titles.
+
 {{< /timelineItem >}}
 
 {{< /timeline >}}
@@ -26,8 +45,30 @@ Volunteer at Game Anglia, Ipswich and Norwich. I have helped to coordinate the e
 
 {{< timeline >}}
 
-{{< timelineItem icon="github" header="Blog/Website/Portfolio" badge="< You're here" subheader="" >}}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non magna ex. Donec sollicitudin ut lorem quis lobortis. Nam ac ipsum libero. Sed a ex eget ipsum tincidunt venenatis quis sed nisl. Pellentesque sed urna vel odio consequat tincidunt id ut purus. Nam sollicitudin est sed dui interdum rhoncus.
+{{< timelineItem icon="github" header="PixiJS Particle System" subheader="PixiJS, TypeScript, Vite" >}}
+
+A modern, flexible particle system for PixiJS - a spiritual successor to the original particle emitter, but rebuilt with a clean TypeScript-first architecture and more expressive API.
+
+<br></br>
+
+This project is open-sourced under the MIT License, allowing collaboration from the community to make the library a better tool for everyone.
+
+<br></br>
+
+{{< github repo="danielpokladek/pixi-particle-system" showThumbnail=false >}}
+{{< /timelineItem >}}
+
+{{< timelineItem icon="github" header="Shader Vault" subheader="GLSL, HLSL, ShaderGraph" >}}
+
+
+
+{{< /timelineItem >}}
+
+{{< timelineItem icon="github" header="Personal Website" badge="< You're here" subheader="Hugo, Blowfish" >}}
+
+The website is built using Hugo library and Blowfish theme, and utilizes GitHub pages as the hosting provider, with automated deployment workflow.
+
+{{< github repo="danielpokladek/blog" showThumbnail=false >}}
 {{< /timelineItem >}}
 
 {{< /timeline >}}
@@ -36,24 +77,21 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non magna ex. D
 
 {{< timeline >}}
 
-{{< timelineItem icon="github" header="University of Suffolk" badge="BSc with Honours" subheader="Computer Games Programming" >}}
-Computer Games Programming course focused on object-orientated programming (OOP), computer software development, and computer graphics. We have worked with <strong>C#</strong> programming language to create game prototypes using Unity game engine, whilst also creating terminal based applications using Visual Studio.
-<br><br>
-<strong>C++</strong> was used as the language when studying computer graphics to create a very simple renderer using <strong>SDL</strong> framework, additionally we have also learned how to parse and manually import simple 3D Wavefront OBJ files into the renderer. Each module was completed under a strict deadline either solo or as a team of 2-4 members.
-<br><br>
+{{< timelineItem icon="graduation-cap" header="University of Suffolk" badge="BSc with Honours" subheader="Computer Games Programming" >}}
+
+Computer Games Programming course focused on object-orientated programming (OOP), computer software development, and computer graphics. 
+
+<br></br>
+
 Dissertation was focused on using shaders to enhance visual fidelity of games using <strong>Cg</strong>/<strong>HLSL</strong> languages.
-{{< /timelineItem >}}
 
-{{< timelineItem icon="github" header="Suffolk New College" badge="DMM" subheader="IT BTEC Level 3 Extended Diploma" >}}
-BTEC Level 3 Extended Diploma in IT focused on information security within system, and how to troubleshoot issues on desktop devices and Linux based servers. We have learned how to create local area networks (LANs), and how to keep the network secure from external bad actors.
 <br><br>
-As an additional modules, we have studied digital graphics using Adobe Photoshop/Adobe Illustrator, basics of e-commerce using Wix web builder, and video game development using GameMaker Studio and GameMaker Language (GML).
-{{< /timelineItem >}}
 
-{{< timelineItem icon="github" header="Suffolk New College" badge="D" subheader="IT BTEC Level 2 Diploma" >}}
-BTEC Level 2 Diploma in IT focused on communications skills and introduction to working within the Information Technology industry. We have studied about computer systems, the inner working of desktop computers, how to correctly assemble a desktop computer, and how to test it ready for deployment to clients.
+We used <strong>C++</strong> when studying computer graphics to create a simple renderer using <strong>SDL</strong> framework, additionally we have also learned how to import and parse 3D Wavefront OBJ files. Each module was completed under a strict deadline either solo or as a team of 2-4 members.
+
 <br><br>
-We have also been introduced to the basics of web development, where we have used <strong>HTML</strong>, <strong>CSS</strong>, and <strong>JavaScript</strong> to create basic websites; finally we have integrated our websites with a MySQL database using <strong>PHP</strong> programming language.
-{{< /timelineItem >}}
 
+We have worked with <strong>C#</strong> programming language to create game prototypes using Unity game engine, whilst also creating terminal based applications using Visual Studio.
+
+{{< /timelineItem >}}
 {{< /timeline >}}
