@@ -1,0 +1,27 @@
+disabled = false
+languageCode = "en"
+languageName = "English"
+weight = 1
+title = ""
+
+[params]
+displayName = "EN"
+isoCode = "en"
+rtl = false
+dateFormat = "2 January 2006"
+logo = "avatar/dp-logo-white.png"
+secondaryLogo = "avatar/dp-logo-black.png"
+
+[params.author]
+name = "Daniel Pokladek"
+email = "hello@danielpokladek.me"
+image = "avatar/avatar.jpg"
+imageQuality = 70
+headline = "Developer"
+bio = "Crafting Shaders, Gameplay & Tools"
+links = [
+    { email = "hello@danielpokladek.me" },
+    { bluesky = "https://bsky.app/profile/dpokladek.bsky.social" },
+    { github = "https://github.com/danielpokladek" },
+    { linkedin = "https://linkedin.com/in/daniel-pokladek" },
+]

@@ -1,0 +1,17 @@
+{
+  "cSpell.words": [
+    "Antichamber",
+    "autoplay",
+    "danielpokladek",
+    "GLSL",
+    "HLSL",
+    "Ilett's",
+    "Pokladek",
+    "Pokladek's",
+    "Spyro",
+    "SSBO"
+  ],
+  "search.exclude": {
+    "/themes/**/*": true
+  }
+}
