@@ -41,7 +41,7 @@ jobs:
               with:
                   node-version: ${{ env.NODE_VERSION }}
 
-            - name: Setup PAges
+            - name: Setup Pages
               id: pages
               uses: actions/configure-pages@v5
 
