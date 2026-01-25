@@ -33,7 +33,7 @@ A typical render pipeline is made up from various buffers used to store data, an
 
 Each object has a stencil ID value that they write to the buffer, and by default all objects write `0` and they are always rendered by our camera. With a stencil shader, we can change that ID, and change how we render the object - this is called a **stencil function/operation**.
 
-![Image of blue sphere overlaid by gray quad.](./pre-stencil.png)
+![Image of blue sphere overlaid by gray quad.](./pre-stencil.webp)
 
 In the above example we have two shapes: a blue sphere, and a grey quad; currently, they are both using the default shaders, which means they are always rendered. With stencil shader, we can make it so that the sphere is only visible behind the quad.
 
@@ -171,7 +171,7 @@ In our case, when the comparison passes (our reference values match) we want to 
 
 If we were to visualize the stencil buffer, we'd see something like the image below - the operations are ran per pixel, but it was easier to visualize the effect by overlaying the numbers over the shape.
 
-![Example showing what stencil buffer would look like](./stencil_buffer_example.png)
+![Example showing what stencil buffer would look like](./stencil_buffer_example.webp)
 
 <details>
 <summary>Full Stencil Write Shader</summary>
@@ -217,11 +217,11 @@ With this knowledge, you now might be starting to see how we could potentially p
 
 The next step is creating the cube effect - we will need a 3D model, I have quickly made a model in Blender; the raw asset as well as exported fbx files are available on the GitHub repo linked at the bottom of the post.
 
-![Cube model with the middle cut out to look like Antichamber cube](./blender_cube.png)
+![Cube model with the middle cut out to look like Antichamber cube](./blender_cube.webp)
 
 In the center of the cube, I have placed four shapes: a sphere, a rotated cube, a cylinder, and a capsule - you can't see it really well on the image below, as the shapes are overlapping, but they are all there.
 
-![Shapes placed in center of the cube](./shapes.png)
+![Shapes placed in center of the cube](./shapes.webp)
 
 Finally, we need to create our "windows" (faces that fill in the gaps in the cube) - for that I have used simple quads, which I have scaled up to fit perfectly in each gap.
 
@@ -229,7 +229,7 @@ We need to create a read/write material for each shape/window, and we need to ap
 
 With everything set up, we can see our effect come alive!
 
-![Cube with stencil shaders applied](./stencil_applied.png)
+![Cube with stencil shaders applied](./stencil_applied.webp)
 
 ## Limitations
 
