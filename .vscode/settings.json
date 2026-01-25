@@ -1,15 +1,23 @@
 {
   "cSpell.words": [
+    "Alisavakis",
     "Antichamber",
     "autoplay",
+    "bartistacats",
+    "bitangent",
     "danielpokladek",
     "GLSL",
+    "HDRP",
     "HLSL",
     "Ilett's",
+    "lerp",
     "Pokladek",
     "Pokladek's",
+    "rauszyk",
+    "scroller",
     "Spyro",
-    "SSBO"
+    "SSBO",
+    "Varyings"
   ],
   "search.exclude": {
     "/themes/**/*": true
