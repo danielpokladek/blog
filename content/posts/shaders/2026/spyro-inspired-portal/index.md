@@ -358,8 +358,13 @@ OUT.uvDistort = uvDistort - distortOffset;
 
 Would you look at that, we're on the last step of the shader! The final effect we have left is the glow around the edge of the inner part of the portal. This is where we will use those screen space UVs again, as we will be creating the glow using a depth texture.
 
-### Depth Texture?
+### Depth Texture
 
-You might ask yourself, what is a depth texture? Or actually.. what is depth? Well, in computer graphics depth has a similar meaning as it would in every day life. 
+Before starting work on the glow, we should probably have a quick catch up on what depth textures are.
 
-Depth describes how far away the fragment (potential pixel) is from the camera; if we visualized the depth, elements further away would appear white and elements closed to camera would appear darker.
+> [!QUOTE] [Cyan (cyanilux)](https://www.cyanilux.com/tutorials/depth/)
+> "**Depth** is a term used in computer graphics to refer to how far a fragment (a potential pixel) is from the camera."
+
+In simple terms, a depth texture records how far pixels are from the current camera - elements far from the camera appear white, and elements close to the camera will appear darker.
+
+// TODO DP: Image showing depth texture.
