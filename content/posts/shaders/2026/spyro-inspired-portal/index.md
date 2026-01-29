@@ -358,13 +358,147 @@ OUT.uvDistort = uvDistort - distortOffset;
 
 Would you look at that, we're on the last step of the shader! The final effect we have left is the glow around the edge of the inner part of the portal. This is where we will use those screen space UVs again, as we will be creating the glow using a depth texture.
 
-### Depth Texture
+### What is Depth
 
-Before starting work on the glow, we should probably have a quick catch up on what depth textures are.
+Before we start working on the glow itself, we'll have a quick catch up on what depth is, how the depth buffer works, and how the depth texture is created and how we can use it.
 
 > [!QUOTE] [Cyan (cyanilux)](https://www.cyanilux.com/tutorials/depth/)
 > "**Depth** is a term used in computer graphics to refer to how far a fragment (a potential pixel) is from the camera."
 
-In simple terms, a depth texture records how far pixels are from the current camera - elements far from the camera appear white, and elements close to the camera will appear darker.
+In most rendering pipelines we have access to something called **Depth Buffer**, this is where the pipeline sorts each fragment ensuring that the fragments closer to the camera are rendered on top of the pixels further away from the camera.
 
-// TODO DP: Image showing depth texture.
+**View/Eye Depth** refers to the distance between a position in the scene to a plane perpendicular to the camera's view (not the camera position itself). View space positions get converted to clip space, via the **Projection Matrix**, and the vertex shader then outputs this position.
+
+Clip space positions have four components `X/Y/Z/W`, where the `W` component in perspective projections is equivalent to the eye depth; in orthographic projections it is always equivalent to `1`.
+
+### Sampling Depth Texture
+
+With this quick catchup, we can now move to actually sampling the depth texture - first thing we need to add to our shader is the depth texture include, this provides us with a lot of built-in functions that handle a lof of math for us.
+
+```hlsl
+#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareDepthTexture.hlsl"
+```
+
+[Link to include source code on Unity GitHub](https://github.com/Unity-Technologies/Graphics/blob/master/Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareDepthTexture.hlsl)
+
+Next, we can add a variable to `Varyings` struct to hold our vertex position in view-space; in order to calculate our view-space position, we will first need the position in world-space. We can handle both calculations in the vertex shader:
+
+```hlsl {hl_lines=[4]}
+struct Varyings
+{
+    float4 positionHCS : SV_POSITION;
+    float3 positionVS : TEXCOORD3;
+    
+    float2 uv : TEXCOORD0;
+    float2 uvDistort : TEXCOORD2;
+
+    float4 screenPos : TEXCOORD1;
+};
+
+Varyings vert(Attributes IN)
+{
+    // ...
+
+    float3 positionWS = TransformObjectToWorld(
+        IN.positionOS.xyz
+    );
+
+    OUT.positionVS = TransformWorldToView(
+        positionWS
+    );
+    
+    // ...
+}
+```
+
+With the position in view-space calculated, we can now start working on sampling our depth texture, converting it to linear space, and adding some color to it.
+
+First we need to sample the raw depth texture - we can do this using a built-in function `SampleSceneDepth(uv)`, and as the parameter we can provide the screen space uvs which we have already calculated earlier on.
+
+We can now take the result and use another built-in function `LinearEyeDepth(depth, zBufferParams)` to convert the depth texture to linear space.
+
+> [!WARNING]
+> By default, in Unity, the sampled depth texture is in non-linear space and might give you unexpected results depending on the effect you're going for.
+
+Lastly we can grab the vertex position in view-space, which we calculated in the vertex function, and use the inverse of the `Z` component; with that calculated, we can then get the depth difference by subtracting fragment eye depth from scene eye depth (also remember to saturate the result, as result isn't normalized).
+
+```hlsl
+float rawDepth = SampleSceneDepth(screenSpaceUV);
+float sceneEyeDepth = LinearEyeDepth(rawDepth, _ZBufferParams);
+
+float fragmentEyeDepth = -IN.positionVS.z;
+float depthDifference = saturate(sceneEyeDepth - fragmentEyeDepth);
+```
+
+![Image showing the depth difference on portal inner](./depth_difference.webp "Returning depth difference variable in fragment shader, allows us to preview the depth calculation.")
+
+You might have noticed that the texture follows what we have discussed - elements closer to our plane are darker, whilst elements further away are lighter. Whilst this creates a really fascinating effect, which can be used for things like fog, we actually need the inverse as the color will apply to lighter areas.
+
+```hlsl
+float depthDifference = saturate(
+    (sceneEyeDepth - fragmentEyeDepth)
+);
+depthDifference = 1 - depthDifference;
+```
+
+### Customizing Glow Effect
+
+What we have right now is a depth texture sample, but we can make it into a glow effect relatively easily. We'll want to add two new properties, `_OutlineDepthScale` and `_OutlineColor` (float and float 4 respectively).
+
+We can then use the new depth scale property to directly modify the depth difference by multiplying each other, this results in the lighter parts of the depth mask becoming darker as we increase the value.
+
+If we now multiply the result by the new color property, we will have a colored outline with control over how deep into the portal it will appear.
+
+```hlsl {hl_lines=[3, 6S]}
+float depthDifference = saturate(
+    (sceneEyeDepth - fragmentEyeDepth) * _OutlineDepthScale
+);
+depthDifference = 1 - depthDifference;
+
+float3 coloredOutline = depthDifference * _OutlineColor;
+```
+
+{{< video 
+    src="colored_outline.mp4"
+    caption="With the color and scaler applied, we can modify the color/depth."
+    autoplay="true"
+    loop="true"
+    muter="true"
+    controls="false"
+    playsinline="true"
+>}}
+
+> [!NOTE]
+> I have added [HDR] tag to the color property in ShaderLab, this automatically enables HDR support for our color and gives us a nice glow when we have bloom enabled in renderer settings.
+
+## Finalizing Effect
+
+Now, all we have left to do is to blend our outline glow with the background we have created previously. We can use a `lerp` (linear interpolation) function to blend the two, and we can use the depth difference as our mask.
+
+```hlsl
+return float4(lerp(color.xyz, coloredDepth, depthDifference), 1.0);
+```
+
+{{< video 
+    src="complete_portal.mp4"
+    caption="Portal inner with outline glow, and distorted background combined."
+    autoplay="true"
+    loop="true"
+    muter="true"
+    controls="false"
+    playsinline="true"
+>}}
+
+And just like that, the effect is complete! I hope you enjoyed this rather lengthy journey, but I think it has been worth it - the final effect looks really good, and with some extra particle effects we can re-create the full effect.
+
+There are some fixes we need to account for - for example, the distortion strength is applied the same no matter how far we are from the portal, which means at further distances the UVs are distorted so much we start seeing gaps.
+
+Since this post is quite lengthy already, I will handle those in a separate post.
+
+---
+
+Thank you for taking your time to read this post, I very much appreciate your time! If you have any comments, suggestions, or requests, feel free to reach out to me via my social media below!
+
+You can find the complete project, with both approaches, over at my shader vault on Github:
+
+{{< github repo="danielpokladek-shaders/spyro-inspired-portal" showThumbnail="true" >}}
