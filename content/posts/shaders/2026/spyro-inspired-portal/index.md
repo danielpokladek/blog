@@ -19,13 +19,13 @@ summary: "My attempt at re-creating the Spyro: Reignited Trilogy portals."
 This post is based on a version of the shader I originally made in 2021.
 {{< /alert >}}
 
-I remember playing Spyro: Reignited Trilogy for the first time, and just being hit with a immense level of nostalgia - everything felt familiar, like going back to your childhood home, but it was fresh with a new coat of paint and few renovations here and there.
+I remember playing Spyro: Reignited Trilogy for the first time, and just being hit with an immense level of nostalgia - everything felt familiar, like going back to your childhood home, but it felt fresh, with a new coat of paint and few renovations here and there.
 
-One thing stood out to me was the portals Spyro would use to travel between the worlds, they received a graphical upgrade, compared to the original PlayStation 1 games, that made them so much more interesting to look at - I could just watch them all day with the calm music in the background.
+One thing that stood out to me was portals Spyro uses to travel between the worlds. They received a graphical upgrade compared to the original PlayStation 1 games, that made them so much more interesting to look at - I could just watch them all day with the calm music in the background.
 
 ## Reference Breakdown
 
-When re-creating effects from games, I like to start by breaking down my goal into more manageable sections. Looking at the reference video, we can identify few layers of effects we'll need to tackle to achieve the same effect:
+When re-creating effects from games, I like to start by breaking down my goal into more manageable sections. Looking at the reference video, we can identify a few layers of effects we'll need to tackle to achieve the same effect:
 
 - **Background**: Background appears to have depth, as depending on the viewing angle we can see different parts of it.
 - **Blur**: Background seems to have some blur applied to it, as it isn't super sharp when looking through the portal.
@@ -36,9 +36,9 @@ Now that we know what we need to do, let's tackle each layer one at a time.
 
 ## Scene Setup
 
-Before starting on the shader, I have setup a simple testing scene - I have a portal model which I grabbed from [Sketchfab](https://sketchfab.com/3d-models/ancient-portal-frame-934bbd85eb4041128a1fa4cde8ac0ea9), and I removed the chains, torches, leafs, and the inner part as we'll be handling that ourselves.
+Before starting on the shader, I set up a simple testing scene - I have a portal model which I grabbed from [Sketchfab](https://sketchfab.com/3d-models/ancient-portal-frame-934bbd85eb4041128a1fa4cde8ac0ea9), and I removed the chains, torches, leaves, and the inner part as we'll be handling that part ourselves.
 
-I created a simple flat plane to fill the middle making sure it expands into the actual bricks of the portal so we don't get any gaps.
+I created a simple flat plane to fill the middle making sure it slightly overlaps the actual bricks of the portal so we don't get any gaps.
 
 Next, we want to create a new sorting layer called "PortalWorld" - this layer will contain the worlds that we will see through the portal, allowing us to disable them from being rendered on the main camera.
 
@@ -51,7 +51,7 @@ In the portal camera, we want to tweak the `Output Texture` field (under **Outpu
 > [!INFO]
 > Project, and source code with assets available in GitHub repository below.
 
-If everything has been setup correctly, when we run Unity we should see the render texture update in inspector.
+If everything has been set up correctly, when we run Unity we should see the render texture update in inspector.
 
 ![Image showing the camera setup and render texture output](./camera_setup.webp)
 
@@ -61,20 +61,20 @@ The background can be split into two sections: the background shown on the porta
 
 ### World "Inside" Portal
 
-I first started with creating a sphere and a unlit URP material, and I assigned the newly created material to our sphere. We need to make sure to set the **Render Face** option to `Back` as we want to see the inside of the sphere (otherwise it would appear invisible).
+I started by creating a sphere and a unlit URP material, and I assigned the newly created material to our sphere. We need to make sure to set the **Render Face** option to `Back` as we want to see the inside of the sphere (otherwise it would appear invisible).
 
-Next I made the sphere as the child of the portal inner, and I moved it slightly off center behind the portal (in the direction players would be looking at it).
+Next I made the sphere as the child of the portal inner, and I moved it slightly off-center behind the portal (in the direction players would be looking at it).
 
 ![Image showing the sphere parented to portal inner](./world_setup.webp "Default Unity sphere, with custom material assigned and render face set to back.")
 
-For the background image, I went into the Fracture Hills level and I grabbed a ultra-wide screenshot of the world. Rather than blurring the image in real-time in the shader, I have applied gaussian blur to the background using image-editing software. I then applied the texture to our sphere material.
+For the background image, I went into the Fracture Hills level and I grabbed an ultra-wide screenshot of the world. Rather than blurring the image in real-time in the shader, I have applied a Gaussian blur to the background using image-editing software. I then applied the texture to our sphere material.
 
-> [!NOTE]
+> [!INFO]
 > We could apply the blur in-shader, but I don't think the quality difference is noticeable enough to justify it - additionally, when we have multiple portals in the world, that will be quite few calculations for something we can have baked-in.
 
 ### Shader Background
 
-Now that we have our world sphere, we can start working on the portal inner shader - I started off by creating a URP unlit shader, and cleaning it up a little only leaving things we will need, and fragment function sampling our main texture.
+Now that we have our world sphere, we can start working on the portal inner shader - I started off by creating a URP unlit shader, and cleaning it up and only leaving things we actually need.
 
 <details>
 <summary>Shader Code</summary>
@@ -168,7 +168,7 @@ If you create a material, which uses our new shader, assign it to the portal inn
 
 #### UV Mapping
 
-This is expected, albeit not correct, behavior. The reason why we are seeing this, is because the second camera is moving with the player, and what we are displaying is the output from that camera; so as we move closer to the portal, the background becomes larger and as we move away, the background becomes smaller.
+This behavior is expected - although not correct for our case. The reason we're seeing this is because the second camera is moving with the player, and what we are displaying is the output from that camera; so as we move closer to the portal, the background becomes larger and as we move away, the background becomes smaller.
 
 We can tackle this problem by applying some clever math. This was a new area to me, but thankfully Sebastian Lague has made an excellent tutorial on portals, and the texture mapping is also covered there.
 
@@ -177,9 +177,9 @@ We can tackle this problem by applying some clever math. This was a new area to 
 
 Sebastian explains this approach really well in the video, with visual examples, so I highly recommend giving at least the timestamped part a watch.
 
-Instead of using the object UVs, we will use screen position of the mesh vertices as our UVs; this will result in the background staying in place.
+Instead of using the object UVs, we will use the screen position of the mesh vertices as our UVs; this will result in the background staying in place.
 
-In order to achieve this effect, we will need to provide the screen position to the fragment shader; luckily Unity has a built in function that can handle this for us.
+In order to achieve this effect, we will need to provide the screen position to the fragment shader; luckily Unity has a built-in function that can handle this for us.
 
 ```hlsl
 struct Varyings
@@ -199,7 +199,7 @@ Varyings vert(Attributes IN)
 }
 ```
 
-Now we can calculate our screen space UVs by dividing the `x` and `y` components by `w` - this is something that Sebastian also covers in the video. This is required in order to correctly apply perspective distortion (the further the object is from camera, the higher the value) to our image. 
+Now we can calculate our screen space UVs by dividing the `x` and `y` components by `w` - this is something that Sebastian also covers in the video. This is required in order to correctly apply perspective distortion (the further the object is from the camera, the higher the value) to our image. 
 
 ```hlsl {hl_lines=[3, 8]}
 half4 frag(Varyings IN) : SV_Target
@@ -232,11 +232,11 @@ Now that we have our background rendering correctly, we can tackle something a l
 
 ### Sampling Noise
 
-We can achieve this easily by sampling a noise texture, and modifying the UVs we have just calculated by adding the noise on top of the UVs. Let's add a new property to our shader called `DistortMap`, calculate the UVs for it in vertex shader, and sample it using the new UVs in fragment shader.
+We can achieve this easily by sampling a noise texture and modifying the UVs we have just calculated by adding the noise on top of the UVs. Let's add a new property to our shader called `DistortMap`, calculate the UVs for it in vertex shader, and sample it using the new UVs in fragment shader.
 
 ```hlsl
 // Inside Properties object
-_DistortMap("Distortion Texture", 2D) = "white" {}
+_DistortMap("Distortion Texture", 2D) = "white" {}-
 // ---
 
 struct Attributes
@@ -286,7 +286,7 @@ half4 frag(Varyings IN) : SV_Target
 }
 ```
 
-With the texture sampled, we now have a static noise we can use in our fragment function. In order for it to affect the UVs, we can simply add it to the screen position UVs we have calculated earlier - we will need the screen space UVs unaffected later, so let's cache it into a new variable called `backgroundUV`.
+With the texture sampled, we now have a static noise pattern we can use in our fragment function. In order for it to affect the UVs, we can simply add it to the screen position UVs we have calculated earlier - we will need the screen space UVs unaffected later, so let's cache it into a new variable called `backgroundUV`.
 
 ```hlsl {hl_lines=[1, 2, 7]}
 float2 backgroundUV = screenSpaceUV;
@@ -301,7 +301,7 @@ half4 color = SAMPLE_TEXTURE2D(
 
 ![Image showing the distorted UVs](./distorted_uvs.webp "Distortion applied to UVs creates a really strong distortion causing background to be visible.")
 
-As you have probably noticed, the distortion effect is quite strong. By creating a new property called `_DistortStrength` we can manipulate the strength of the sampled noise texture, and lessen the impact of the noise on the UVs.
+As you've probably noticed, the distortion effect is quite strong. By creating a new property called `_DistortStrength` we can manipulate the strength of the sampled noise texture, and lessen the impact of the noise on the UVs.
 
 ```hlsl {hl_lines=[6]}
 float distortTexture = SAMPLE_TEXTURE2D(
@@ -314,7 +314,7 @@ distortionTexture *= _DistortStrength;
 
 ### Animating Noise
 
-Now that we noise affecting our background, and we can control how strong the noise is, we can actually tackle animating the noise texture - this is actually quite straightforward.
+Now that we have noise affecting our background, and we can control how strong the noise is, we can actually tackle animating the noise texture - this is actually quite straightforward.
 
 Inside of our vertex shader where we are sampling our distort texture UVs, we can modify them by using the built in Unity `_Time.x` property. I first create a vector 2 property called `_DistortAnimationVector`, we can use that to specify which direction we want the UVs to animate, and also I create another property called `_DistortAnimationSpeed`.
 
@@ -323,7 +323,7 @@ Properties
 {
     // ...
 
-    // In ShaderLab the vector length only applies in 
+    // In ShaderLab the vector length only applies in the
     //  inspector, otherwise it is still treated as x/y/z/w.
     _DistortAnimationVector("Animation Direction", vector, 2) = (0, 1, 0, 0)
     _DistortAnimationSpeed("Animation Speed", float) = 2
@@ -360,7 +360,7 @@ Would you look at that, we're on the last step of the shader! The final effect w
 
 ### What is Depth
 
-Before we start working on the glow itself, we'll have a quick catch up on what depth is, how the depth buffer works, and how the depth texture is created and how we can use it.
+Before we start working on the glow itself, a quick catch up on what depth is, how the depth buffer works, and how the depth texture is created and how we can use it.
 
 > [!QUOTE] [Cyan (cyanilux)](https://www.cyanilux.com/tutorials/depth/)
 > "**Depth** is a term used in computer graphics to refer to how far a fragment (a potential pixel) is from the camera."
@@ -373,7 +373,7 @@ Clip space positions have four components `X/Y/Z/W`, where the `W` component in 
 
 ### Sampling Depth Texture
 
-With this quick catchup, we can now move to actually sampling the depth texture - first thing we need to add to our shader is the depth texture include, this provides us with a lot of built-in functions that handle a lof of math for us.
+With this quick catchup, we can now move to actually sampling the depth texture - first thing we need to add to our shader is the depth texture include, this provides us with built-in functions that handle some of the math for us.
 
 ```hlsl
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareDepthTexture.hlsl"
@@ -420,7 +420,7 @@ We can now take the result and use another built-in function `LinearEyeDepth(dep
 > [!WARNING]
 > By default, in Unity, the sampled depth texture is in non-linear space and might give you unexpected results depending on the effect you're going for.
 
-Lastly we can grab the vertex position in view-space, which we calculated in the vertex function, and use the inverse of the `Z` component; with that calculated, we can then get the depth difference by subtracting fragment eye depth from scene eye depth (also remember to saturate the result, as result isn't normalized).
+Lastly we can grab the vertex position in view-space, which we calculated in the vertex function, and use the inverse of the `Z` component; with that calculated, we can then get the depth difference by subtracting fragment eye depth from scene eye depth (also remember to saturate the result, as the result isn't normalized).
 
 ```hlsl
 float rawDepth = SampleSceneDepth(screenSpaceUV);
@@ -432,7 +432,7 @@ float depthDifference = saturate(sceneEyeDepth - fragmentEyeDepth);
 
 ![Image showing the depth difference on portal inner](./depth_difference.webp "Returning depth difference variable in fragment shader, allows us to preview the depth calculation.")
 
-You might have noticed that the texture follows what we have discussed - elements closer to our plane are darker, whilst elements further away are lighter. Whilst this creates a really fascinating effect, which can be used for things like fog, we actually need the inverse as the color will apply to lighter areas.
+You might have noticed that the texture follows what we have discussed - elements closer to our plane are darker, whilst elements further away are lighter. While this creates a really fascinating effect, which can be used for things like fog, we actually need the inverse as the color will apply to lighter areas.
 
 ```hlsl
 float depthDifference = saturate(
@@ -443,9 +443,9 @@ depthDifference = 1 - depthDifference;
 
 ### Customizing Glow Effect
 
-What we have right now is a depth texture sample, but we can make it into a glow effect relatively easily. We'll want to add two new properties, `_OutlineDepthScale` and `_OutlineColor` (float and float 4 respectively).
+What we have right now is a depth texture sample, but we can make it into a glow effect relatively easily. We'll want to add two new properties, `_OutlineDepthScale` and `_OutlineColor` (float and float4 respectively).
 
-We can then use the new depth scale property to directly modify the depth difference by multiplying each other, this results in the lighter parts of the depth mask becoming darker as we increase the value.
+We can then use the new depth scale property to directly modify the depth difference by multiplying them together, this results in the lighter parts of the depth mask becoming darker as we increase the value.
 
 If we now multiply the result by the new color property, we will have a colored outline with control over how deep into the portal it will appear.
 
@@ -491,7 +491,7 @@ return float4(lerp(color.xyz, coloredDepth, depthDifference), 1.0);
 
 And just like that, the effect is complete! I hope you enjoyed this rather lengthy journey, but I think it has been worth it - the final effect looks really good, and with some extra particle effects we can re-create the full effect.
 
-There are some fixes we need to account for - for example, the distortion strength is applied the same no matter how far we are from the portal, which means at further distances the UVs are distorted so much we start seeing gaps.
+There are a few fixes we still need to account for, for example the distortion strength is applied the same no matter how far we are from the portal, which means at further distances the UVs are distorted so much we start seeing gaps.
 
 Since this post is quite lengthy already, I will handle those in a separate post.
 
