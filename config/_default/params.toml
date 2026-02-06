@@ -34,8 +34,8 @@ enableStyledScrollbar = true
   showScrollToTop = true
 
 [homepage]
-  layout = "background" # valid options: page, profile, hero, card, background, custom
-  #homepageImage = "background.svg"
+  layout = "hero" # valid options: page, profile, hero, card, background, custom
+  homepageImage = "showreel_short_comp.mp4"
   showRecent = true
   showRecentItems = 5
   showMoreLink = false
