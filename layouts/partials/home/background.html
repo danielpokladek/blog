@@ -26,10 +26,7 @@ false }}
             muted
             loop
             playsinline
-            style="
-              filter: blur(2px), brightness(50%);
-              transform: translateY(-100px);
-            "
+            style="transform: translateY(-100px)"
           >
             <source
               src="{{ $homepageImage.RelPermalink }}"
@@ -38,6 +35,7 @@ false }}
           </video>
           <div
             class="absolute inset-0 bg-gradient-to-b from-transparent via-neutral/80 to-neutral dark:via-neutral-800/80 dark:to-neutral-800 pointer-events-none"
+            style="height: calc(100% - 100px)"
           ></div>
           {{ else }}
           <img
@@ -53,14 +51,7 @@ false }}
             end
             }}
           />
-          {{ end }}
-          <div
-            class="from-neutral absolute inset-0 h-[1000px] bg-gradient-to-t to-transparent mix-blend-normal dark:from-neutral-800"
-          ></div>
-          <!-- <div
-            class="from-neutral absolute inset-0 h-[1000px] bg-gradient-to-t to-neutral-100 opacity-60 mix-blend-normal dark:from-neutral-800 dark:to-neutral-800"
-          ></div> -->
-          {{ end }}
+          {{ end }} {{ end }}
         </div>
         <div
           class="relative flex flex-col items-center justify-center px-1 py-1 text-center"
@@ -94,6 +85,9 @@ false }}
           <h2 class="mt-0 mb-0 text-xl text-neutral-800 dark:text-neutral-300">
             {{ . | markdownify }}
           </h2>
+          <h4 class="mt-0 mb-0 text-l text-neutral-800 dark:text-neutral-300">
+            {{ $.Site.Params.Author.bio | markdownify }}
+          </h4>
           {{ end }}
           <div class="mt-3 mb-10 text-2xl">
             {{ with .Site.Params.Author.links }}
