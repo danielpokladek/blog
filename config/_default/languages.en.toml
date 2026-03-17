@@ -24,4 +24,5 @@ links = [
     { bluesky = "https://bsky.app/profile/dpokladek.bsky.social" },
     { github = "https://github.com/danielpokladek" },
     { linkedin = "https://linkedin.com/in/daniel-pokladek" },
+    { artstation = "https://www.artstation.com/dpokladek" },
 ]
