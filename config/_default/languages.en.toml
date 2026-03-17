@@ -21,8 +21,8 @@ headline = "Developer"
 bio = "Crafting Shaders, Gameplay & Tools"
 links = [
     { email = "hello@danielpokladek.me" },
-    { bluesky = "https://bsky.app/profile/dpokladek.bsky.social" },
     { github = "https://github.com/danielpokladek" },
     { linkedin = "https://linkedin.com/in/daniel-pokladek" },
+    { bluesky = "https://bsky.app/profile/dpokladek.bsky.social" },
     { artstation = "https://www.artstation.com/dpokladek" },
 ]
