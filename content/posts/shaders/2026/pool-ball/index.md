@@ -27,13 +27,13 @@ These functions are signed (as the name suggests), which means that the inside o
 
 The two main articles I used were the [iquilezles's SDF functions list](https://iquilezles.org/articles/distfunctions2d/), and [XOR's article on SDFs](https://mini.gmshaders.com/p/sdf); whilst I will be explaining my thought process, I highly recommend getting familiar with both of the articles as they will provide all the knowledge you'd need to follow this article and understand how SDFs work.
 
-![iquilezles disk 2D SDF](circle-sdf.png "Source: [iquilezles on ShaderToy](https://www.shadertoy.com/view/3ltSW2) - drawing a circle using SDF.")
+![iquilezles disk 2D SDF](./circle_sdf.webp "Source: [iquilezles on ShaderToy](https://www.shadertoy.com/view/3ltSW2) - drawing a circle using SDF.")
 
 SDFs are very powerful; they not only allow you to draw primitive 2D shapes, but you can also combine them to create more complex shapes; additionally SDFs are not just limited to 2D shapes, as 3D shapes can also be rendered using 3D SDF functions.
 
 I will not be using those, but iquilezles has an [article](https://iquilezles.org/articles/distfunctions/) about them.
 
-![iquilezles 3D SDFs](./3d_sdf.png "Source: [iquilezles on ShaderToy](https://www.shadertoy.com/view/Xds3zN) - all shapes are drawn using SDFs.")
+![iquilezles 3D SDFs](./3d_sdf.webp "Source: [iquilezles on ShaderToy](https://www.shadertoy.com/view/Xds3zN) - all shapes are drawn using SDFs.")
 
 ## Implementation in Unity
 
@@ -92,7 +92,7 @@ float lineMask = smoothstep(0.01, 0.0, lineDistance);
 color.rgb = lerp(color.rgb, _Accent_Color.rgb, lineMask);
 ```
 
-![HLSL code visualized in Shader Graph](./line_sg.png "Visual shaders editors are a great tool to make shaders, but they also provide instant feedback on how each operation modifies input value - great when learning shaders.")
+![HLSL code visualized in Shader Graph](./line_sg.webp "Visual shaders editors are a great tool to make shaders, but they also provide instant feedback on how each operation modifies input value - great when learning shaders.")
 
 With the progress so far, we can already create a variety of pool balls:
 
@@ -127,7 +127,7 @@ Great progress so far, but you might've noticed a small issue - if you haven't, 
 
 In more simple terms, if you take a piece of paper with a dot in the middle and you wrap it around the ball so the edges meet at the back, you won't see the dot twice. In order to compensate for this, we need two pieces of paper that are half in width; now if we stick one of the edges together, and then wrap the paper around the ball we will see the dot twice.
 
-![Image showing the UVs being doubled and half width](./double-uv.png "Using fract with 'doubled' U gives us exactly what we need - now anything using those UVs will be doubled on the horizontal axis.")
+![Image showing the UVs being doubled and half width](./double-uv.webp "Using fract with 'doubled' U gives us exactly what we need - now anything using those UVs will be doubled on the horizontal axis.")
 
 Luckily for us, we can fix this quite easily! 
 
@@ -135,7 +135,7 @@ As you can see in the above example we can use the tiling and offset node in Sha
 
 Now we just need to apply some color to our pool ball. Looking at some references, I've noticed that in most pool balls the circle shares the same color as the top/bottom of the ball with stripe.
 
-![](./pool-balls.png "Left Image - [Eight Ball Rack 2005 SeanMcClean, CC BY-SA 3.0](https://commons.wikimedia.org/w/index.php?curid=289346) | Right Image - Our circle mask with colors applied to them.")
+![](./pool-balls.webp "Left Image - [Eight Ball Rack 2005 SeanMcClean, CC BY-SA 3.0](https://commons.wikimedia.org/w/index.php?curid=289346) | Right Image - Our circle mask with colors applied to them.")
 
 In order to add some color to our ball, we can once again use `lerp` to linearly interpolate between two values just like we have done with the horizontal line; since the line is already part of `color`, we can lerp between it and the base color value to "cut out" a hole in the horizontal line:
 
@@ -147,7 +147,7 @@ color.rgb = lerp(color.rgb, _Base_Color.rgb, circleMask);
 ```
 The same exact logic can be translated to ShaderGraph:
 
-![](./number-circle-sg.png "Ignore the last lerp node where we use saturate, this will be used later; for now just use the result of smoothstep node.")
+![](./number-circle-sg.webp "Ignore the last lerp node where we use saturate, this will be used later; for now just use the result of smoothstep node.")
 
 ### Ball Numbers
 
@@ -155,7 +155,7 @@ Now time for probably the most difficult part of the article - rendering the bal
 
 First thing we will need is a texture with our numbers. Since I'm creating the 8-Ball style pool balls, we will need 15 numbers and a blank spot (no number) which results in 16 spaces required. We can lay out the sprites in various ways, but I have opted for a 4 by 4 grid as that will work well with our requirements and will provide a power of 2 texture.
 
-![](./numbers_sdf_font.png "On the left is the raw font atlas image (source available on GitHub), and on the right is the same font atlas with grid lines to help visualize each cell.")
+![](./numbers_sdf_font.webp "On the left is the raw font atlas image (source available on GitHub), and on the right is the same font atlas with grid lines to help visualize each cell.")
 
 Here comes the more difficult part, we need to sample our texture based on the number we want to show - first, we'll create a new property called `_Number` of type `Integer` with a range of 0...15:
 
@@ -224,19 +224,19 @@ color.rgb = lerp(color.rgb, _Numbers_Color.rgb, maskedNumber);
 return color;
 ```
 
-![](./complete_ball.png "Complete 8-Ball style ball with a yellow stripe and number 6 (note, this isn't actually a valid 8-Ball, its just for visualization).")
+![](./complete_ball.webp "Complete 8-Ball style ball with a yellow stripe and number 6 (note, this isn't actually a valid 8-Ball, its just for visualization).")
 
 Not too bad, right? I found that the ShaderGraph version is a little more involved, and there possibly is a better way to do it, but the version I have here is what worked for me - I'm open for suggestions though!
 
-![](./sg-uv-calculations.png "ShaderGraph logic follows the same steps as the HLSL version, the biggest challenge came from organizing the nodes so they don't become spaghetti.")
+![](./sg-uv-calculations.webp "ShaderGraph logic follows the same steps as the HLSL version, the biggest challenge came from organizing the nodes so they don't become spaghetti.")
 
-![](./sg-sampling-text.png "Once the UVs are calculated, the final steps of number sampling are relatively simple.")
+![](./sg-sampling-text.webp "Once the UVs are calculated, the final steps of number sampling are relatively simple.")
 
 ## Results and Adjustments
 
 Well done, you've made it! With this shader, we can easily create a variety of different pool balls (not just US-style 8/9 ball); because the shader is procedurally generating the lines, number background, and the number itself, we can apply it to different sized balls and the lines will remain crisp.
 
-![](./ball_examples.png "From left, examples of different balls which can be created: 8-Ball, British red ball, white cue ball, British yellow ball, American style 8-ball.")
+![](./ball_examples.webp "From left, examples of different balls which can be created: 8-Ball, British red ball, white cue ball, British yellow ball, American style 8-ball.")
 
 The next part isn't mandatory, but there are some quick tweaks we can make to improve the shader. We most likely don't want to show the number circle when there is no number (0 is selected), we can use `saturate()` with our current number to get a value of either `0` or `1` (saturate clamps the value in 0...1 range) and we can multiply our circle mask by that value.
 
