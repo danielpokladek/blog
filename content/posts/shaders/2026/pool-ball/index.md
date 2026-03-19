@@ -1,8 +1,8 @@
 ---
-title: 'Creating Procedural Balls with Signed Distance Fields'
+title: 'Procedural Pool Balls'
 date: '2026-03-17'
 tags: ["shaders", "unity", "parallax"]
-summary: "Using a parallax effect to create cracked ice inspired by Dragon Age: Inquisition."
+summary: "Using signed distance fields to create procedural pool balls."
 ---
 
 {{< github repo="danielpokladek-shaders/billiards-ball" showThumbnail="false" >}}
